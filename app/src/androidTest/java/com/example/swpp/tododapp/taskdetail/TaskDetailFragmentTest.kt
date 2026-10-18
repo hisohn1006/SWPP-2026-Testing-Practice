@@ -2,7 +2,7 @@ package com.example.swpp.tododapp.taskdetail
 
 import androidx.test.filters.MediumTest
 import org.junit.runner.RunWith
-import androidx.test.ext.junit.runners.AndroidJUnit4;
+import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.example.swpp.tododapp.R
 import com.example.swpp.tododapp.data.Task
 import org.junit.Test
@@ -40,17 +40,24 @@ class TaskDetailFragmentTest {
     }
 
     @Test
-    fun activeTaskDetails_DisplayedInUi() = runTest {
-        // GIVEN - Add active task to the DB
+    fun activeTaskDetails_launched_displaysTitleDescriptionAndUncheckedStatus() = runTest {
+        // Given an active task in the repository.
+        val activeTask = Task("Active Task", "AndroidX Rocks", false, "active-detail-1")
+        repository.saveTask(activeTask)
 
-        // WHEN - Details fragment launched to display task
+        // When the details fragment is launched for that task.
+        val bundle = TaskDetailFragmentArgs(activeTask.id).toBundle()
+        launchFragmentInContainer<TaskDetailFragment>(bundle, R.style.AppTheme)
 
-        // (Optional for explanation) Pause here for 2 seconds to visually confirm fragment launching
-        Thread.sleep(2000)
-
-        // THEN - Task details are displayed on the screen
-        // make sure that the title/description are both shown and correct
-        // and make sure the "active" checkbox is shown unchecked
-
+        // Then the title, description, and active completion state are displayed.
+        onView(withId(R.id.task_detail_title_text))
+            .check(matches(isDisplayed()))
+            .check(matches(withText("Active Task")))
+        onView(withId(R.id.task_detail_description_text))
+            .check(matches(isDisplayed()))
+            .check(matches(withText("AndroidX Rocks")))
+        onView(withId(R.id.task_detail_complete_checkbox))
+            .check(matches(isDisplayed()))
+            .check(matches(not(isChecked())))
     }
-    }
+}
