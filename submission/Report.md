@@ -3,6 +3,7 @@
 **Student:** 2024-11521 Hoonil Sohn  
 **Forked repository:** https://github.com/hisohn1006/SWPP-2026-Testing-Practice  
 **Exercise branch:** https://github.com/hisohn1006/SWPP-2026-Testing-Practice/tree/codex/testing-specs  
+**Pull request:** https://github.com/hisohn1006/SWPP-2026-Testing-Practice/pull/1  
 **Tested code:** `origin/feature/due-date` (`7e091a7`), with only specs and tests added on top. Production code was not changed.
 
 ## Spec refinements
