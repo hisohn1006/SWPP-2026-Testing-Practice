@@ -22,10 +22,12 @@ The tests were run against the intentionally buggy feature code. Expected failin
 
 | Command | Result | Defect evidence |
 | --- | --- | --- |
-| `./gradlew testDebugUnitTest --no-daemon` | 14 tests, 2 failed | `dueDateLabel_fullMonthBoundaryFuture_returnsTotalDays`: expected `[D-30, D-31, D-32]`, actual `[D-30, D-Day, D-1]`. `dueDateLabel_fullMonthBoundaryPast_returnsTotalDays`: expected `[D+30, D+31, D+32]`, actual `[D+30, D-Day, D+1]`. |
-| `./gradlew connectedDebugAndroidTest --no-daemon` on connected `Medium_Phone` emulator | 7 tests, 4 failed | `setDueDateLabel_reboundActiveWithoutDate_clearsAndHides` and `setDueDateLabel_reboundNull_clearsAndHides` expected `""`, actual `"CLEAR"`. The fresh active-without-date and fresh-null cases expected `View.GONE` (8), actual `View.VISIBLE` (0). |
+| `./gradlew testDebugUnitTest --no-daemon` | 16 tests, 2 failed | `dueDateLabel_fullMonthBoundaryFuture_returnsTotalDays`: expected `[D-30, D-31, D-32]`, actual `[D-30, D-Day, D-1]`. `dueDateLabel_fullMonthBoundaryPast_returnsTotalDays`: expected `[D+30, D+31, D+32]`, actual `[D+30, D-Day, D+1]`. |
+| `./gradlew connectedDebugAndroidTest --no-daemon` on connected `Medium_Phone` emulator | 8 tests, 4 failed | `setDueDateLabel_reboundActiveWithoutDate_clearsAndHides` and `setDueDateLabel_reboundNull_clearsAndHides` expected `""`, actual `"CLEAR"`. The fresh active-without-date and fresh-null cases expected `View.GONE` (8), actual `View.VISIBLE` (0). |
 
 The unit failures correspond to the PR's first bug: `Period.between(today, dueDate).days` uses only the day component and drops full months. The initial unit suite passed because its cross-month examples spanned only a few days; the full-month boundary refinement exposed the defect. The integration rebinding failures correspond to the second bug: `setDueDateLabel` updates the TextView only for nonempty labels, so `CLEAR` survives when a completed task with no due date becomes active. The extra fresh-view failures show that empty labels are also left visible.
+
+The tutorial's earlier exercises were also completed: three statistics cases run through one JUnit parameterized test (all passed), and the Espresso task-detail display and task-click navigation tests passed. The emulator's three animation scales were set to zero before the final Android run.
 
 ### Pull-request CI verification
 
