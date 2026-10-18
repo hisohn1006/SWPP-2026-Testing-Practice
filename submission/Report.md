@@ -27,4 +27,6 @@ The tests were run against the intentionally buggy feature code. Expected failin
 
 The unit failures correspond to the PR's first bug: `Period.between(today, dueDate).days` uses only the day component and drops full months. The initial unit suite passed because its cross-month examples spanned only a few days; the full-month boundary refinement exposed the defect. The integration rebinding failures correspond to the second bug: `setDueDateLabel` updates the TextView only for nonempty labels, so `CLEAR` survives when a completed task with no due date becomes active. The extra fresh-view failures show that empty labels are also left visible.
 
-These are local Gradle and emulator results. A pull-request CI run was not used as evidence for this report.
+### Pull-request CI verification
+
+[GitHub Actions run 39144901129](https://github.com/hisohn1006/SWPP-2026-Testing-Practice/actions/runs/39144901129) on PR #1 completed with a `failure` conclusion. Both `unit-test` and `integration-test` jobs failed. GitHub's test annotations identify the same two `DueDateUtilsTest` failures and the same four `TasksListBindingsTest` failures listed above, with matching expected and actual values. Thus each of the two known bugs is detected by a failing CI test. No production code was changed to make the tests pass.
