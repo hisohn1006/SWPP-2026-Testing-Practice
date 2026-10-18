@@ -24,8 +24,10 @@
 - Error cases
   - None.
 - Edge cases
-  - One day before and after today use `D-1` and `D+1`. `[Unit]`
-    - Tip: Given `today=2026-10-19`, `dueDate=2026-10-20` then `2026-10-18`, `isCompleted=false` / When `dueDateLabel` is called twice / Then it returns `D-1` then `D+1`.
+  - One day after today uses `D-1`. `[Unit]`
+    - Tip: Given `today=2026-10-19`, `dueDate=2026-10-20`, `isCompleted=false` / When `dueDateLabel` is called / Then it returns `D-1`.
+  - One day before today uses `D+1`. `[Unit]`
+    - Tip: Given `today=2026-10-19`, `dueDate=2026-10-18`, `isCompleted=false` / When `dueDateLabel` is called / Then it returns `D+1`.
 
 **Undefined behavior** (optional)
 - None.
